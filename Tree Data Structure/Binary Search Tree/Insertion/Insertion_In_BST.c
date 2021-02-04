@@ -11,26 +11,25 @@ void display(struct node *);
 struct node *root=0;
 int main()
 {
-    int array[20];
-    int size;
+    int size,x;
     printf("Enter the number of data:");
     scanf("%d",&size);
     printf("Enter the data to be inserted in BST:");
     for(int i=0;i<size;i++)
     {
-            scanf("%d",&array[i]);
-            root=insert(root,&array[i]);
-            printf("Data %d inserted in BST...\n",array[i]);
+            scanf("%d",&x);
+            root=insert(root,&x);
+            printf("Data %d inserted in BST...\n",x);
     }
     printf("Tree elements are:");
-    display(struct node *root);
+    display(root);
     return 0;
 }
 struct node* insert(struct node *root,int *data)
 {
     if(root==0)
     {
-        struct node *current,*newnode;
+        struct node *newnode;
         newnode=(struct node *)malloc(sizeof(struct node));
         newnode->data=*data;
         newnode->left=0;
@@ -44,20 +43,19 @@ struct node* insert(struct node *root,int *data)
         else if(*data>root->data)
             root->right=insert(root->right,data);
         else
-            printf("Enter a valid data for insertion...!\n");
+            printf("Two or more data can not be same in BST...!\n");
     }
     return root;
 }
-//preorder traversal
+//Inorder traversal:data will always be in sorted form.
 void display(struct node *root)
 {
-    printf("dj");
     if(root==0)
-        return ;
+        return;
     else
     {
-        printf("%d ",root->data);
         display(root->left);
+        printf("%d ",root->data);
         display(root->right);
     }
 }
